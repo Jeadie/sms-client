@@ -17,11 +17,16 @@ var pollerCmd = &cobra.Command{
 	Long: ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("poller called")
+		fmt.Println(cmd.Flags())
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(pollerCmd)
+
+	pollerCmd.Flags().StringArray("poll_endpoints", []string{"192.168.8.1"}, "Endpoint to expect a Hilink device server to be running")
+	pollerCmd.Flags().StringArray("push_endpoints", []string{"127.0.0.1"}, "Endpoint to send new, polled SMSs to.")
+	pollerCmd.Flags().Uint("poll_period", 10, "Period to poll poll_endpoint, seconds.")
 
 	// Here you will define your flags and configuration settings.
 
