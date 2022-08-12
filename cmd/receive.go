@@ -5,6 +5,7 @@ Copyright © 2022 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"fmt"
 	hi "github.com/Jeadie/SmsClient/pkg/hilink"
 	"github.com/spf13/cobra"
 )
@@ -16,7 +17,10 @@ var (
 		Short: "Receive all SMS messages from Hilink modem device",
 		Long:  ``,
 		Run: func(cmd *cobra.Command, args []string) {
-			hi.ReceiveSms(pollEndpoints)
+			smsChan := hi.ReceiveSms(pollEndpoints)
+			for sms := range smsChan {
+				fmt.Println(sms)
+			}
 		},
 	}
 )

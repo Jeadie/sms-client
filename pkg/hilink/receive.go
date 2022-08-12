@@ -4,25 +4,33 @@ import (
 	"context"
 	"fmt"
 	"github.com/jeadie/hilink"
-	"os"
 )
 
-// ReceiveSms from a list of endpoints.
-func ReceiveSms(endpoints []string) {
-	for _, endpoint := range endpoints {
-		hiClient, err := CreateHilink(endpoint)
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
+// ReceiveSms from a list of endpoints. If a Hilink client cannot be connected to, or Smss cannot
+// be retrieved from a device, no error is thrown
+func ReceiveSms(endpoints []string) chan Sms {
+	output := make(chan Sms)
+
+	go func(output chan Sms, endpoints []string) {
+		defer close(output)
+		for _, endpoint := range endpoints {
+			hiClient, err := CreateHilink(endpoint)
+			if err != nil {
+				fmt.Println(err)
+				continue
+			}
+
+			sms, err := hiClient.ListSms()
+			if err != nil {
+				fmt.Println(err)
+			}
+
+			for _, s := range sms {
+				output <- s
+			}
 		}
-		sms, err := hiClient.ListSms()
-		if err != nil {
-			fmt.Println(err)
-		}
-		for _, s := range sms {
-			fmt.Println(s)
-		}
-	}
+	}(output, endpoints)
+	return output
 }
 
 // ListSms from the Hilink device.
