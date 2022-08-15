@@ -46,5 +46,5 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	rootCmd.PersistentFlags().StringArrayVar(&pollEndpoints, POLL_ENDPOINTS_FLAG, []string{"http://192.168.8.1/"}, "Endpoint to expect a Hilink device server to be running")
+	rootCmd.PersistentFlags().StringArrayVar(&pollEndpoints, POLL_ENDPOINTS_FLAG, []string{"http://192.168.8.1"}, "Endpoint to expect a Hilink device server to be running")
 }

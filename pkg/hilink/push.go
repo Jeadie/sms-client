@@ -8,7 +8,7 @@ import (
 )
 
 // PushSms payloads to an endpoint.
-func PushSms(endpoint string, sms []Sms) {
+func PushSms(endpoint string, sms []SmsMessage) {
 	fmt.Printf("Pushing %d smses to %s\n", len(sms), endpoint)
 	for _, s := range sms {
 		reqBodyBytes := new(bytes.Buffer)
