@@ -92,8 +92,19 @@ func GetHeaders(url string) map[string][]string {
 
 }
 
+func ParseResponse(resp *http.Response) SmsListResponse {
+	body, _ := ioutil.ReadAll(resp.Body)
+	var smsList SmsListResponse
+
+	err := xml.Unmarshal(body, &smsList)
+	if err != nil {
+		fmt.Println(err)
+		return SmsListResponse{Count: 0}
+	}
+}
+
 func GetSmsList(url string) []SmsMessage {
-	nb := 1
+	nb := 5
 	postData := fmt.Sprintf(`<?xml version = "1.0" encoding = "UTF-8"?>%c<request><PageIndex>%d</PageIndex><ReadCount>%d</ReadCount><BoxType>%d</BoxType><SortType>%d</SortType><Ascending>%d</Ascending><UnreadPreferred>%d</UnreadPreferred></request>`, '\n', 1, nb, 1, 0, 0, 1)
 	req, err := http.NewRequest(http.MethodPost, fmt.Sprintf(`%s/api/sms/sms-list`, url), bytes.NewBufferString(postData))
 	if err != nil {
@@ -108,13 +119,7 @@ func GetSmsList(url string) []SmsMessage {
 		fmt.Println(err)
 		return []SmsMessage{}
 	}
-	body, _ := ioutil.ReadAll(resp.Body)
-	var smsList SmsListResponse
+	smsList := ParseResponse(resp)
 
-	err = xml.Unmarshal(body, &smsList)
-	if err != nil {
-		fmt.Println(err)
-		return []SmsMessage{}
-	}
 	return smsList.Messages.Message
 }

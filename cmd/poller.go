@@ -18,11 +18,11 @@ var (
 		Short: "Poll Huawei Hilink devices for received SMSs.",
 		Long:  ``,
 		Run: func(cmd *cobra.Command, args []string) {
-			hi.Poll(pollEndpoints, poll_period, func(endpoint string, sms []hi.SmsMessage) {
+			for msg := range hi.Poll(pollEndpoints, poll_period) {
 				for _, e := range push_endpoints {
-					hi.PushSms(e, sms)
+					hi.PushSms(e, msg)
 				}
-			})
+			}
 		},
 	}
 )
