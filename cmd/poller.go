@@ -28,14 +28,4 @@ func init() {
 
 	pollerCmd.Flags().StringArrayVar(&push_endpoints, PUSH_ENDPOINTS_FLAG, GetDefaultPushEndpoints(), "Endpoint to send new, polled SMSs to.")
 	pollerCmd.Flags().UintVar(&poll_period, POLL_PERIOD_FLAG, GetDefaultPollPeriod(), "Period to poll poll_endpoint, seconds.")
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// pollerCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// pollerCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
