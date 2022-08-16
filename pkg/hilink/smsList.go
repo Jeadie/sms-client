@@ -101,6 +101,7 @@ func ParseResponse(resp *http.Response) SmsListResponse {
 		fmt.Println(err)
 		return SmsListResponse{Count: 0}
 	}
+	return smsList
 }
 
 func GetSmsList(url string) []SmsMessage {
