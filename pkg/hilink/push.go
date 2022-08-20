@@ -10,7 +10,6 @@ import (
 // PushSms payloads to an endpoint.
 func PushSms(endpoint string, s SmsMessage) {
 	fmt.Println("Pushing message", s)
-	return
 	reqBodyBytes := new(bytes.Buffer)
 	err := json.NewEncoder(reqBodyBytes).Encode(s)
 	if err != nil {
