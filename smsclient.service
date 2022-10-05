@@ -3,7 +3,7 @@ Description=Sms Client for a Hilink device
 Documentation=https://github.com/Jeadie/sms-client
 
 [Service]
-EnvironmentFile=/etc/sysconfig
+EnvironmentFile=/etc/sysconfig/sms
 ExecStart=/usr/sbin/SmsClient poller
 ExecReload=/usr/sbin/SmsClient poller
 
