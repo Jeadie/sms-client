@@ -9,7 +9,8 @@ import (
 	"time"
 )
 
-//response>
+// response>
+//
 //	<Count>1</Count>
 //	<Messages>
 //		<Message>
@@ -24,7 +25,8 @@ import (
 //			<SmsType>1</SmsType>
 //		</Message>
 //	</Messages>
-//</response>
+//
+// </response>
 type SmsListResponse struct {
 	XMLName  xml.Name        `xml:"response"`
 	Count    int             `xml:"Count"`
@@ -35,15 +37,15 @@ type SmsListMessages struct {
 	Message []SmsMessage `xml:"Message"`
 }
 
-//			<Smstat>0</Smstat>
-//			<Index>40008</Index>
-//			<Phone>...</Phone>
-//			<Content>Hello</Content>
-//			<Date>2022-08-15 12:09:24</Date>
-//			<Sca></Sca>
-//			<SaveType>4</SaveType>
-//			<Priority>0</Priority>
-//			<SmsType>1</SmsType>
+// <Smstat>0</Smstat>
+// <Index>40008</Index>
+// <Phone>...</Phone>
+// <Content>Hello</Content>
+// <Date>2022-08-15 12:09:24</Date>
+// <Sca></Sca>
+// <SaveType>4</SaveType>
+// <Priority>0</Priority>
+// <SmsType>1</SmsType>
 type SmsMessage struct {
 	XMLName  xml.Name `xml:"Message"`
 	Smstat   uint     `xml:"Smstat"`
@@ -57,10 +59,10 @@ type SmsMessage struct {
 	SmsType  uint     `xml:"SmsType"`
 }
 
-//<response>
-//<SesInfo>SessionID=4Xr6pqD9k5i8bTSX32YGrVGirdhK7zyNYFVjzP38q8/0JTxgAmOKfDpMJ8lmeJbstBJIvR7JLU5wc7zejlpn8kpuzRsh/oajMHwMklaXrF3RKiUTU5v4tI9tAZxVL6tm</SesInfo>
-//<TokInfo>ttws6CQ9WT5EftzoWYS6yVCEfRNK3BhE</TokInfo>
-//</response>
+// <response>
+// <SesInfo>SessionID=4Xr6pqD9k5i8bTSX32YGrVGirdhK7zyNYFVjzP38q8/0JTxgAmOKfDpMJ8lmeJbstBJIvR7JLU5wc7zejlpn8kpuzRsh/oajMHwMklaXrF3RKiUTU5v4tI9tAZxVL6tm</SesInfo>
+// <TokInfo>ttws6CQ9WT5EftzoWYS6yVCEfRNK3BhE</TokInfo>
+// </response>
 type SesTokInfo struct {
 	XMLName xml.Name `xml:"response"`
 	SesInfo string   `xml:"SesInfo"`
