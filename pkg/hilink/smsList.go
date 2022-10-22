@@ -105,7 +105,7 @@ func ParseResponse(resp *http.Response) SmsListResponse {
 }
 
 func GetSmsList(url string) []SmsMessage {
-	nb := 5
+	nb := 50
 	postData := fmt.Sprintf(`<?xml version = "1.0" encoding = "UTF-8"?>%c<request><PageIndex>%d</PageIndex><ReadCount>%d</ReadCount><BoxType>%d</BoxType><SortType>%d</SortType><Ascending>%d</Ascending><UnreadPreferred>%d</UnreadPreferred></request>`, '\n', 1, nb, 1, 0, 0, 1)
 	req, err := http.NewRequest(http.MethodPost, fmt.Sprintf(`%s/api/sms/sms-list`, url), bytes.NewBufferString(postData))
 	if err != nil {
