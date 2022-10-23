@@ -8,8 +8,9 @@ import (
 
 // rootCmd represents the base command when called without any subcommands
 var (
-	pollEndpoints []string
-	rootCmd       = &cobra.Command{
+	reconstruct_packets bool
+	pollEndpoints       []string
+	rootCmd             = &cobra.Command{
 		Use:   "SmsClient",
 		Short: "A brief description of your application",
 		Long: `A longer description that spans multiple lines and likely contains
@@ -20,7 +21,7 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 		// Uncomment the following line if your bare application
 		// has an action associated with it:
-		Run: func(cmd *cobra.Command, args []string) { pollerCmd.Run(cmd, args)},
+		Run: func(cmd *cobra.Command, args []string) { pollerCmd.Run(cmd, args) },
 	}
 )
 
@@ -35,4 +36,5 @@ func Execute() {
 
 func init() {
 	rootCmd.PersistentFlags().StringArrayVar(&pollEndpoints, POLL_ENDPOINTS_FLAG, GetDefaultPollEndpoints(), "Endpoint to expect a Hilink device server to be running")
+	rootCmd.Flags().BoolVar(&reconstruct_packets, RECONSTRUCT_PACKETS_FLAG, GetDefaultReconstructPackets(), "Attempt to reconstruct Smss from Sms fragments if found.")
 }

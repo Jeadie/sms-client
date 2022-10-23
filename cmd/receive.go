@@ -13,7 +13,7 @@ var (
 		Short: "Receive all SMS messages from Hilink modem device",
 		Long:  ``,
 		Run: func(cmd *cobra.Command, args []string) {
-			smsChan := hi.ReceiveSms(pollEndpoints, false)
+			smsChan := hi.ReceiveSms(pollEndpoints, reconstruct_packets)
 			for sms := range smsChan {
 				fmt.Println(sms)
 			}
