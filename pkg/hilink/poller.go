@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func Poll(endpoints []string, periodSecs uint) chan SmsMessage {
+func Poll(endpoints []string, periodSecs uint, pktReconstruct bool) chan SmsMessage {
 	smsOutput := make(chan SmsMessage, 10)
 
 	go func(endpoints []string, periodSecs uint, output chan SmsMessage) {
@@ -17,6 +17,9 @@ func Poll(endpoints []string, periodSecs uint) chan SmsMessage {
 			for _, e := range endpoints {
 				localMostRecentTimestamp := "1970-01-01 12:00:00"
 				smsList := GetSmsList(e)
+				if pktReconstruct {
+					smsList = ReconstructSms(smsList)
+				}
 				for _, m := range smsList {
 					// Update local last sms timestamp
 					if m.Date > localMostRecentTimestamp {
